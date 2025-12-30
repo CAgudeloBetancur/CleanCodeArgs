@@ -1,4 +1,4 @@
-package com.app.args;
+package com.app.args.deprecated;
 
 import java.text.ParseException;
 import java.util.*;
@@ -8,12 +8,17 @@ public class Args {
     private String schema;
     private String[] args;
     private boolean valid = true;
+
     private Set<Character> unexpectedArguments = new TreeSet<Character>();
+
     private Map<Character, Boolean> booleanArgs = new HashMap<Character, Boolean>();
     private Map<Character, String> stringArgs = new HashMap<Character, String>();
     private Map<Character, Integer> intArgs = new HashMap<Character, Integer>();
+
     private Set<Character> argsFound = new HashSet<Character>();
+
     private int currentArgument;
+
     private char errorArgumentId = '\0';
     private String errorParameter = "TILT";
     private ErrorCode errorCode = ErrorCode.OK;
@@ -33,7 +38,7 @@ public class Args {
     }
 
     private boolean parse() throws ParseException {
-        if (schema.length() == 0 && args.length == 0) return true;
+        if (schema.isEmpty() && args.length == 0) return true;
         parseSchema();
         try {
             parseArguments();
@@ -44,7 +49,7 @@ public class Args {
     }
     private boolean parseSchema() throws ParseException {
         for (String element : schema.split(",")) {
-            if (element.length() > 0) {
+            if (!element.isEmpty()) {
                 String trimmedElement = element.trim();
                 parseSchemaElement(trimmedElement);
             }
@@ -93,7 +98,7 @@ public class Args {
     }
 
     private boolean isBooleanSchemaElement(String elementTail) {
-        return elementTail.length() == 0;
+        return elementTail.isEmpty();
     }
     private boolean isIntegerSchemaElement(String elementTail) {
         return elementTail.equals("#");
@@ -247,4 +252,6 @@ public class Args {
     }
     public class ArgsException extends Exception {
     }
+
+
 }

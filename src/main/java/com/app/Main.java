@@ -1,6 +1,8 @@
 package com.app;
 
-import com.app.args.Args;
+
+import com.app.args.current.Args;
+import com.app.args.current.exceptions.ArgsException;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -12,8 +14,8 @@ public class Main {
             int port = arg.getInt('p');
             String directory = arg.getString('d');
             executeApplication(logging, port, directory);
-        } catch (Exception e) {
-            System.out.printf("Argument error: %s\n", e.getMessage());
+        } catch (ArgsException e) {
+            System.out.printf("Argument error: %s\n", e.errorMessage());
         }
     }
 
